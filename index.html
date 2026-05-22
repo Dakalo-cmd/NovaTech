@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="NovaTech IT Solutions — affordable web development, networking, digital systems and IT support for businesses in Mpumalanga and across South Africa.">
+
+<title>NovaTech IT Solutions | IT Support & Web Development — Mpumalanga</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#ffffff;
+  color:#111827;
+  line-height:1.6;
+}
+
+.container{
+  width:90%;
+  max-width:1100px;
+  margin:auto;
+}
+
+a{
+  text-decoration:none;
+}
+
+/* NAVBAR */
+
+nav{
+  background:white;
+  border-bottom:1px solid #e5e7eb;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+}
+
+.logo{
+  font-family:'Syne',sans-serif;
+  font-size:24px;
+  font-weight:700;
+  color:#2563eb;
+}
+
+.nav-links{
+  display:flex;
+  gap:20px;
+}
+
+.nav-links a{
+  color:#374151;
+  font-weight:500;
+}
+
+.nav-btn{
+  background:#2563eb;
+  color:white;
+  padding:10px 18px;
+  border-radius:8px;
+}
+
+/* HERO */
+
+.hero{
+  padding:100px 0;
+  background:#f8fbff;
+}
+
+.hero-content{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.hero-badge{
+  display:inline-block;
+  background:#dbeafe;
+  color:#2563eb;
+  padding:8px 15px;
+  border-radius:30px;
+  margin-bottom:20px;
+  font-size:14px;
+  font-weight:600;
+}
+
+.hero h1{
+  font-size:52px;
+  line-height:1.1;
+  margin-bottom:20px;
+  font-family:'Syne',sans-serif;
+}
+
+.hero h1 span{
+  color:#2563eb;
+}
+
+.hero p{
+  font-size:18px;
+  color:#4b5563;
+  margin-bottom:30px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.btn-primary{
+  background:#2563eb;
+  color:white;
+  padding:14px 24px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+.btn-secondary{
+  border:1px solid #d1d5db;
+  color:#111827;
+  padding:14px 24px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+.hero-card{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  margin-bottom:15px;
+  border:1px solid #e5e7eb;
+}
+
+.hero-card h3{
+  margin-bottom:8px;
+}
+
+/* SECTION */
+
+section{
+  padding:80px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:15px;
+  font-size:40px;
+  font-family:'Syne',sans-serif;
+}
+
+.section-sub{
+  text-align:center;
+  color:#6b7280;
+  max-width:700px;
+  margin:auto auto 50px;
+}
+
+/* SERVICES */
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
+
+.service-card{
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #e5e7eb;
+}
+
+.service-icon{
+  font-size:40px;
+  margin-bottom:20px;
+}
+
+.service-card h3{
+  margin-bottom:15px;
+}
+
+/* ABOUT */
+
+.about{
+  background:#f9fafb;
+}
+
+.about-content{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.about-box{
+  background:white;
+  padding:35px;
+  border-radius:18px;
+  border:1px solid #e5e7eb;
+}
+
+/* CONTACT */
+
+.contact{
+  background:#111827;
+  color:white;
+}
+
+.contact-wrapper{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+
+.contact-box{
+  background:rgba(255,255,255,0.05);
+  padding:30px;
+  border-radius:18px;
+}
+
+.contact-box input,
+.contact-box textarea,
+.contact-box select{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:10px;
+  background:#1f2937;
+  color:white;
+}
+
+.contact-box button{
+  width:100%;
+  padding:14px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+  background:#0b1120;
+  color:#9ca3af;
+  text-align:center;
+  padding:25px 0;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero-content,
+.about-content,
+.contact-wrapper{
+  grid-template-columns:1fr;
+}
+
+.hero h1{
+  font-size:38px;
+}
+
+.nav-links{
+  display:none;
+}
+
+}
+
+<!-- ADD THIS INSIDE <style> -->
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+/* WHATSAPP BUTTON */
+
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:65px;
+  height:65px;
+  background:#25d366;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  z-index:9999;
+  transition:0.3s;
+}
+
+.whatsapp-float:hover{
+  transform:scale(1.1);
+}
+
+/* BETTER NAVBAR */
+
+nav{
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.9);
+}
+
+/* HERO IMPROVEMENTS */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:#2563eb10;
+  border-radius:50%;
+  top:-100px;
+  right:-100px;
+}
+
+.hero h1{
+  animation:fadeUp 1s ease;
+}
+
+.hero p{
+  animation:fadeUp 1.2s ease;
+}
+
+.hero-buttons{
+  animation:fadeUp 1.4s ease;
+}
+
+.hero-card{
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.hero-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+/* BUTTONS */
+
+.btn-primary{
+  transition:0.3s;
+}
+
+.btn-primary:hover{
+  background:#1d4ed8;
+  transform:translateY(-2px);
+}
+
+.btn-secondary{
+  transition:0.3s;
+}
+
+.btn-secondary:hover{
+  background:#111827;
+  color:white;
+}
+
+/* SERVICE CARDS */
+
+.service-card{
+  transition:0.3s;
+}
+
+.service-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+/* ABOUT BOX */
+
+.about-box{
+  transition:0.3s;
+}
+
+.about-box:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
+
+/* CONTACT */
+
+.contact-box{
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.contact-box input,
+.contact-box textarea,
+.contact-box select{
+  transition:0.3s;
+}
+
+.contact-box input:focus,
+.contact-box textarea:focus,
+.contact-box select:focus{
+  outline:none;
+  border:1px solid #2563eb;
+}
+
+.contact-box button{
+  transition:0.3s;
+}
+
+.contact-box button:hover{
+  background:#1d4ed8;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeUp{
+
+from{
+  opacity:0;
+  transform:translateY(30px);
+}
+
+to{
+  opacity:1;
+  transform:translateY(0);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero{
+  padding:70px 0;
+}
+
+.hero h1{
+  font-size:34px;
+}
+
+.section-title{
+  font-size:32px;
+}
+
+.hero-buttons{
+  flex-direction:column;
+}
+
+.btn-primary,
+.btn-secondary{
+  width:100%;
+  text-align:center;
+}
+
+.whatsapp-float{
+  width:58px;
+  height:58px;
+  font-size:28px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+  <div class="container nav-inner">
+
+    <div class="logo">
+      NovaTech
+    </div>
+
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <a href="#contact" class="nav-btn">
+      Get Quote
+    </a>
+
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<!-- REPLACE YOUR HERO SECTION WITH THIS -->
+
+<section class="hero">
+
+<div class="container hero-content">
+
+<div>
+
+<div class="hero-badge">
+  🚀 Mpumalanga & South Africa
+</div>
+
+<h1>
+  Modern IT Solutions For 
+  <span>Growing Businesses</span>
+</h1>
+
+<p>
+  NovaTech helps businesses with websites, networking, IT support, and digital systems designed to help small businesses grow online.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#contact" class="btn-primary">
+  Get Free Quote
+</a>
+
+<a href="https://wa.me/27607433055" class="btn-secondary">
+  WhatsApp Us
+</a>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="hero-card">
+  <h3>💻 Business Websites</h3>
+  <p>Beautiful modern websites designed for mobile and desktop.</p>
+</div>
+
+<div class="hero-card">
+  <h3>⚡ Fast IT Support</h3>
+  <p>Reliable support for computers, systems, networking, and troubleshooting.</p>
+</div>
+
+<div class="hero-card">
+  <h3>🌐 Networking Solutions</h3>
+  <p>WiFi setup, office internet solutions, and business networking.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section id="services">
+
+<div class="container">
+
+<h2 class="section-title">
+  Our Services
+</h2>
+
+<p class="section-sub">
+  We provide simple and affordable technology solutions for businesses in Mpumalanga and across South Africa.
+</p>
+
+<div class="services-grid">
+
+<div class="service-card">
+  <div class="service-icon">💻</div>
+
+  <h3>Web Development</h3>
+
+  <p>
+    Professional business websites designed for phones, tablets, and computers.
+  </p>
+</div>
+
+<div class="service-card">
+  <div class="service-icon">🛠️</div>
+
+  <h3>IT Support</h3>
+
+  <p>
+    Help with software, computer issues, troubleshooting, and maintenance.
+  </p>
+</div>
+
+<div class="service-card">
+  <div class="service-icon">📶</div>
+
+  <h3>Networking</h3>
+
+  <p>
+    WiFi setup, printer setup, internet troubleshooting, and office networking.
+  </p>
+</div>
+
+<div class="service-card">
+  <div class="service-icon">📱</div>
+
+  <h3>Digital Systems</h3>
+
+  <p>
+    Booking systems, invoicing systems, and custom business solutions.
+  </p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<div class="container about-content">
+
+<div>
+
+<h2 class="section-title" style="text-align:left;">
+  About NovaTech
+</h2>
+
+<p style="margin-bottom:20px;color:#4b5563;">
+  NovaTech IT Solutions is a growing IT business based in Mpumalanga, South Africa.
+</p>
+
+<p style="margin-bottom:20px;color:#4b5563;">
+  We focus on helping businesses with affordable websites, IT support, networking, and digital solutions.
+</p>
+
+<p style="color:#4b5563;">
+  As a beginner business, our goal is simple — provide honest service, quality work, and long-term support for every client.
+</p>
+
+</div>
+
+<div class="about-box">
+
+<h3 style="margin-bottom:20px;">
+  Why Choose Us?
+</h3>
+
+<p style="margin-bottom:15px;">
+✅ Affordable pricing
+</p>
+
+<p style="margin-bottom:15px;">
+✅ Friendly support
+</p>
+
+<p style="margin-bottom:15px;">
+✅ Fast communication
+</p>
+
+<p style="margin-bottom:15px;">
+✅ Modern solutions
+</p>
+
+<p>
+✅ Based in Mpumalanga
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+<div class="container contact-wrapper">
+
+<div>
+
+<h2 class="section-title" style="text-align:left;color:white;">
+  Contact Us
+</h2>
+
+<p style="color:#d1d5db;margin-bottom:25px;">
+  Tell us what you need and we’ll contact you with a free quote.
+</p>
+
+<p style="margin-bottom:15px;">
+📍 Mpumalanga, South Africa
+</p>
+
+<p style="margin-bottom:15px;">
+📞 +27 60 743 3055
+</p>
+
+<p>
+✉️ info@novatech.co.za
+</p>
+
+</div>
+
+<div class="contact-box">
+
+<input type="text" placeholder="Your Name">
+
+<input type="email" placeholder="Your Email">
+
+<select>
+  <option>Select Service</option>
+  <option>Website Development</option>
+  <option>IT Support</option>
+  <option>Networking</option>
+  <option>Digital Systems</option>
+</select>
+
+
+<textarea rows="5" placeholder="Tell us about your project"></textarea>
+
+<button onclick="sendMessage()">
+  Send Message
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ADD THIS BEFORE </body> -->
+
+<a 
+  href="https://wa.me/27607433055?text=Hello%20NovaTech%20I%20need%20help%20with%20my%20business" 
+  class="whatsapp-float"
+  target="_blank"
+>
+💬
+</a>
+<!-- REPLACE FOOTER WITH THIS -->
+
+<footer>
+
+<div class="container">
+
+<h2 style="color:white;margin-bottom:10px;font-family:'Syne',sans-serif;">
+  NovaTech IT Solutions
+</h2>
+
+<p style="margin-bottom:15px;">
+  Affordable IT solutions for businesses in Mpumalanga & South Africa.
+</p>
+
+<p style="margin-bottom:10px;">
+  📍 Mpumalanga, South Africa
+</p>
+
+<p style="margin-bottom:10px;">
+  📞 +27 60 743 3055
+</p>
+
+<p style="margin-bottom:20px;">
+  ✉️ info@novatech.co.za
+</p>
+
+<div style="display:flex;justify-content:center;gap:15px;flex-wrap:wrap;">
+
+<a href="#services" style="color:#9ca3af;">
+Services
+</a>
+
+<a href="#about" style="color:#9ca3af;">
+About
+</a>
+
+<a href="#contact" style="color:#9ca3af;">
+Contact
+</a>
+
+</div>
+
+<hr style="margin:25px 0;border-color:#1f2937;">
+
+<p>
+  © 2026 NovaTech IT Solutions — All Rights Reserved
+</p>
+
+</div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* =========================
+   SUPABASE CONFIG
+========================= */
+
+const supabaseUrl =
+"https://ankfgvbjzqvtvasabmdb.supabase.co";
+
+const supabaseKey =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua2ZndmJqenF2dHZhc2FibWRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzNjU1NDUsImV4cCI6MjA5NDk0MTU0NX0.km9VWyJEPfz9TvNbmvZiSKnFC1pq2dIFoMC17WFe5kU";
+
+const supabaseClient =
+supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+/* =========================
+   SEND CONTACT MESSAGE
+========================= */
+
+async function sendMessage(){
+
+  const name =
+    document.querySelector('input[type="text"]').value.trim();
+
+  const email =
+    document.querySelector('input[type="email"]').value.trim();
+
+  const service =
+    document.querySelector('select').value;
+
+  const message =
+    document.querySelector('textarea').value.trim();
+
+  /* VALIDATION */
+
+  if(!name || !email || !message){
+
+    alert("Please fill all fields");
+    return;
+
+  }
+
+  try {
+
+    const { data, error } =
+      await supabaseClient
+        .from("messages")
+        .insert([
+          {
+            name: name,
+            email: email,
+            service: service,
+            message: message
+          }
+        ]);
+
+    if(error){
+
+      console.log(error);
+      alert(error.message);
+      return;
+
+    }
+
+    alert("Message sent successfully!");
+
+    /* CLEAR FORM */
+
+    document.querySelector('input[type="text"]').value = "";
+
+    document.querySelector('input[type="email"]').value = "";
+
+    document.querySelector('select').selectedIndex = 0;
+
+    document.querySelector('textarea').value = "";
+
+  } catch(err){
+
+    console.log(err);
+
+    alert("Something went wrong");
+
+  }
+
+}
+
+</script>
+</body>
+</html>
