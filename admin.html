@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaTech Admin Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#f5f7fb;
+  color:#111827;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  min-height:100vh;
+}
+
+.sidebar{
+  background:#111827;
+  color:white;
+  padding:30px 20px;
+}
+
+.logo{
+  font-family:'Syne',sans-serif;
+  font-size:28px;
+  margin-bottom:40px;
+  color:#60a5fa;
+}
+
+.sidebar-menu a{
+  display:block;
+  padding:14px;
+  margin-bottom:10px;
+  border-radius:12px;
+  color:#d1d5db;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.sidebar-menu a:hover{
+  background:#1f2937;
+}
+
+.main{
+  padding:30px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.logout-btn{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:12px 18px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.stat-card{
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.stat-card h2{
+  font-size:38px;
+  color:#2563eb;
+}
+
+.messages-box{
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.table-wrapper{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+th,
+td{
+  padding:15px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+}
+
+th{
+  background:#f9fafb;
+}
+
+.delete-btn{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+@media(max-width:900px){
+
+.dashboard{
+  grid-template-columns:1fr;
+}
+
+.sidebar{
+  display:none;
+}
+
+.main{
+  padding:20px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+
+<div class="sidebar">
+
+<div class="logo">
+NovaTech
+</div>
+
+<div class="sidebar-menu">
+<a href="#">Dashboard</a>
+<a href="#">Messages</a>
+<a href="index.html">Website</a>
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<div>
+<h1>Admin Dashboard</h1>
+<p>Manage customer contact messages</p>
+</div>
+
+<button class="logout-btn" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+<div class="stats">
+
+<div class="stat-card">
+<p>Total Messages</p>
+<h2 id="totalMessages">0</h2>
+</div>
+
+<div class="stat-card">
+<p>Website Status</p>
+<h2>Online</h2>
+</div>
+
+</div>
+
+<div class="messages-box">
+
+<h2>Customer Messages</h2>
+
+<div class="table-wrapper">
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Service</th>
+<th>Message</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="messagesTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const supabaseUrl =
+"https://ankfgvbjzqvtvasabmdb.supabase.co";
+
+const supabaseKey =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua2ZndmJqenF2dHZhc2FibWRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzNjU1NDUsImV4cCI6MjA5NDk0MTU0NX0.km9VWyJEPfz9TvNbmvZiSKnFC1pq2dIFoMC17WFe5kU";
+
+const supabaseClient =
+supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+checkUser();
+loadMessages();
+
+async function checkUser(){
+
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if(!user){
+    window.location.href = 'login.html';
+  }
+
+}
+
+async function loadMessages(){
+
+  const { data, error } =
+    await supabaseClient
+      .from('messages')
+      .select('*')
+      .order('id', { ascending:false });
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  document.getElementById('totalMessages').innerHTML = data.length;
+
+  const table =
+    document.getElementById('messagesTable');
+
+  table.innerHTML = '';
+
+  data.forEach(message => {
+
+    table.innerHTML += `
+      <tr>
+        <td>${message.name}</td>
+        <td>${message.email}</td>
+        <td>${message.service}</td>
+        <td>${message.message}</td>
+        <td>
+          <button
+            class="delete-btn"
+            onclick="deleteMessage(${message.id})"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    `;
+
+  });
+
+}
+
+async function deleteMessage(id){
+
+  const confirmDelete =
+    confirm('Delete this message?');
+
+  if(!confirmDelete) return;
+
+  const { error } =
+    await supabaseClient
+      .from('messages')
+      .delete()
+      .eq('id', id);
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  loadMessages();
+
+}
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  window.location.href = 'auth.html';
+
+}
+
+</script>
+
+</body>
+</html>
