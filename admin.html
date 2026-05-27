@@ -22,8 +22,8 @@
 
 body{
   font-family:'DM Sans',sans-serif;
-  background:#f5f7fb;
-  color:#111827;
+  background:#020407;
+  color:#d8e4ff;
 }
 
 .dashboard{
@@ -33,16 +33,21 @@ body{
 }
 
 .sidebar{
-  background:#111827;
+  background:#05080f;
   color:white;
   padding:30px 20px;
+  border-right:1px solid rgba(255,255,255,0.06);
 }
 
 .logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
   font-family:'Syne',sans-serif;
   font-size:28px;
   margin-bottom:40px;
-  color:#60a5fa;
+  color:#00e5b0;
+  font-weight:700;
 }
 
 .sidebar-menu a{
@@ -50,13 +55,17 @@ body{
   padding:14px;
   margin-bottom:10px;
   border-radius:12px;
-  color:#d1d5db;
+  color:#94a3b8;
   text-decoration:none;
   transition:0.3s;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.04);
 }
 
 .sidebar-menu a:hover{
-  background:#1f2937;
+  background:#0d1425;
+  color:#00e5b0;
+  border-color:rgba(0,229,176,0.2);
 }
 
 .main{
@@ -88,22 +97,24 @@ body{
 }
 
 .stat-card{
-  background:white;
+  background:#0d1425;
   padding:25px;
   border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
 }
 
 .stat-card h2{
   font-size:38px;
-  color:#2563eb;
+  color:#00e5b0;
 }
 
 .messages-box{
-  background:white;
+  background:#0d1425;
   border-radius:20px;
   padding:25px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+  border:1px solid rgba(255,255,255,0.06);
+  box-shadow:0 10px 30px rgba(0,0,0,0.35);
 }
 
 .table-wrapper{
@@ -119,12 +130,13 @@ table{
 th,
 td{
   padding:15px;
-  border-bottom:1px solid #e5e7eb;
+  border-bottom:1px solid rgba(255,255,255,0.06);
   text-align:left;
 }
 
 th{
-  background:#f9fafb;
+  background:#111b30;
+  color:#00e5b0;
 }
 
 .delete-btn{
@@ -134,6 +146,12 @@ th{
   padding:8px 12px;
   border-radius:8px;
   cursor:pointer;
+  transition:0.3s;
+}
+
+.delete-btn:hover{
+  background:#dc2626;
+  transform:translateY(-2px);
 }
 
 @media(max-width:900px){
@@ -161,7 +179,39 @@ th{
 <div class="sidebar">
 
 <div class="logo">
-NexridgeTech
+
+<div style="
+width:42px;
+height:42px;
+background:#00e5b0;
+border-radius:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-shrink:0;
+">
+
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="#020407"
+stroke-width="2.5"
+stroke-linecap="round"
+stroke-linejoin="round"
+width="22"
+height="22"
+>
+<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+<polyline points="2 17 12 22 22 17"></polyline>
+<polyline points="2 12 12 17 22 12"></polyline>
+</svg>
+
+</div>
+
+<div>
+Nexridge<span style="color:white;">Tech</span>
+</div>
+
 </div>
 
 <div class="sidebar-menu">
