@@ -334,14 +334,15 @@ async function loadMessages(){
 
     table.innerHTML += `
       <tr>
-        <td>${message.name}</td>
-        <td>${message.email}</td>
-        <td>${message.service}</td>
-        <td>${message.message}</td>
+<td>${message.first_name} ${message.last_name}</td>
+           <td>${message.name}</td>
+           <td>${message.email}</td>
+           <td>${message.service}</td>
+           <td>${message.message}</td>
         <td>
           <button
             class="delete-btn"
-            onclick="deleteMessage(${message.id})"
+           onclick="deleteMessage('${message.id}')"
           >
             Delete
           </button>

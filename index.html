@@ -223,7 +223,7 @@ header.scrolled .nav-inner {
   gap: 6px;
   background: none;
   border: none;
- cursor: default;
+ cursor: pointer;
   padding: 4px;
   z-index: 600;
 }
@@ -369,7 +369,7 @@ header.scrolled .nav-inner {
   border-radius: 6px;
   transition: all 0.3s var(--ease-out);
   border: 1px solid var(--lime);
-  cursor: default;
+ cursor: pointer;
 }
 
 .btn-lime:hover {
@@ -393,7 +393,7 @@ header.scrolled .nav-inner {
   border-radius: 6px;
   border: 1px solid var(--border-bright);
   transition: all 0.3s var(--ease-out);
-  cursor: default;
+  cursor: pointer;
 }
 
 .btn-ghost:hover {
@@ -739,7 +739,7 @@ section { padding: 9rem 0; position: relative; z-index: 2; }
   padding: 0.875rem 2rem;
   border-radius: 4px;
   white-space: nowrap;
-  cursor: default;
+  cursor: pointer;
   transition: all 0.3s;
 }
 
@@ -896,7 +896,7 @@ section { padding: 9rem 0; position: relative; z-index: 2; }
   font-size: 0.875rem;
   letter-spacing: 0.01em;
   text-decoration: none;
-  cursor: default;
+  cursor: pointer;
   transition: all 0.3s var(--ease-out);
 }
 
@@ -1070,7 +1070,7 @@ textarea.form-field { min-height: 110px; resize: vertical; }
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  cursor: default;
+ cursor: pointer;
   transition: all 0.3s var(--ease-out);
   display: flex;
   align-items: center;
@@ -1911,10 +1911,59 @@ const revealObserver = new IntersectionObserver(entries => {
 reveals.forEach(el => revealObserver.observe(el));
 
 /* ══ FORM SUBMIT ══ */
-document.getElementById('contactForm').addEventListener('submit', e => {
+
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  const submitBtn = document.querySelector('.form-submit');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending...';
+
+  // Get form values
+  const firstName = contactForm.querySelectorAll('.form-field')[0].value;
+  const lastName = contactForm.querySelectorAll('.form-field')[1].value;
+  const email = contactForm.querySelectorAll('.form-field')[2].value;
+  const service = contactForm.querySelectorAll('.form-field')[3].value;
+  const message = contactForm.querySelectorAll('.form-field')[4].value;
+
+  const fullName = `${firstName} ${lastName}`;
+
+  // Save to Supabase
+  const { error } = await supabaseClient
+    .from('messages')
+    .insert([
+      {
+        name: fullName,
+        email: email,
+        service: service,
+        message: message
+      }
+    ]);
+
+  if (error) {
+    console.error(error);
+
+    alert('Something went wrong. Please try again.');
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `
+      Send Message
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    `;
+
+    return;
+  }
+
+  // Success screen
   document.getElementById('contactFormArea').style.display = 'none';
   document.getElementById('successScreen').style.display = 'block';
+
+  contactForm.reset();
 });
 
 /* ══ CARD HOVER MOUSE TRACKING ══ */
