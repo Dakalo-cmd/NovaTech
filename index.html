@@ -1944,13 +1944,14 @@ contactForm.addEventListener('submit', async (e) => {
     const { error } = await supabaseClient
       .from('messages')
       .insert([
-        {
-          name: fullName,
-          email,
-          service,
-          message
-        }
-      ]);
+  {
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    service: service,
+    message: message
+  }
+]);
 
     if (error) throw error;
 
