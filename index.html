@@ -1945,7 +1945,8 @@ contactForm.addEventListener('submit', async (e) => {
   if (error) {
     console.error(error);
 
-    alert('Something went wrong. Please try again.');
+   console.error(error);
+alert(error.message);
 
     submitBtn.disabled = false;
     submitBtn.innerHTML = `
