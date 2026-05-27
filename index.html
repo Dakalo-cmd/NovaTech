@@ -1912,6 +1912,8 @@ reveals.forEach(el => revealObserver.observe(el));
 
 /* ══ FORM SUBMIT ══ */
 
+/* ══ FORM SUBMIT ══ */
+
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', async (e) => {
@@ -1920,48 +1922,56 @@ contactForm.addEventListener('submit', async (e) => {
   const submitBtn = document.querySelector('.form-submit');
 
   submitBtn.disabled = true;
-  submitBtn.innerHTML = 'Sending...';
+
+  submitBtn.innerHTML = `
+    Sending...
+  `;
 
   try {
 
-    const firstName =
-      contactForm.querySelectorAll('.form-field')[0].value;
+    const fields = contactForm.querySelectorAll('.form-field');
 
-    const lastName =
-      contactForm.querySelectorAll('.form-field')[1].value;
+    const firstName = fields[0].value.trim();
+    const lastName = fields[1].value.trim();
+    const email = fields[2].value.trim();
+    const service = fields[3].value;
+    const message = fields[4].value.trim();
 
-    const email =
-      contactForm.querySelectorAll('.form-field')[2].value;
+    const fullName = `${firstName} ${lastName}`;
 
-    const service =
-      contactForm.querySelectorAll('.form-field')[3].value;
+    const { data, error } = await supabaseClient
+      .from('messages')
+      .insert([
+     {
+  first_name: firstName,
+  last_name: lastName,
+  email: email,
+  service: service,
+  message: message
+}
+      ])
+      .select();
 
-    const message =
-      contactForm.querySelectorAll('.form-field')[4].value;
-
-    cconst { error } = await supabaseClient
-  .from('messages')
-  .insert([
-    {
-      first_name: firstName,
-      email: email,
-      service: service,
-      message: message
+    if (error) {
+      console.error('SUPABASE ERROR:', error);
+      throw error;
     }
-  ]);
-    if (error) throw error;
 
+    console.log('Saved:', data);
+
+    // Show success screen
     document.getElementById('contactFormArea').style.display = 'none';
-
     document.getElementById('successScreen').style.display = 'block';
 
     contactForm.reset();
 
-  } catch (error) {
+  } catch (err) {
 
-    console.error(error);
+    console.error(err);
 
-    alert(error.message);
+    alert(
+      err.message || 'Something went wrong. Please try again.'
+    );
 
     submitBtn.disabled = false;
 
@@ -1974,6 +1984,7 @@ contactForm.addEventListener('submit', async (e) => {
     `;
   }
 });
+
 /* ══ CARD HOVER MOUSE TRACKING ══ */
 document.querySelectorAll('.svc-card:not(.svc-card-cta)').forEach(card => {
   card.addEventListener('mousemove', e => {
