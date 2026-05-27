@@ -1939,18 +1939,16 @@ contactForm.addEventListener('submit', async (e) => {
     const message =
       contactForm.querySelectorAll('.form-field')[4].value;
 
-    const { error } = await supabaseClient
-      .from('messages')
-      .insert([
-        {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          service: service,
-          message: message
-        }
-      ]);
-
+    cconst { error } = await supabaseClient
+  .from('messages')
+  .insert([
+    {
+      first_name: firstName,
+      email: email,
+      service: service,
+      message: message
+    }
+  ]);
     if (error) throw error;
 
     document.getElementById('contactFormArea').style.display = 'none';
